@@ -32,7 +32,7 @@
  .nothing {
      border: none;
      background-color: transparent;
-     color: #808080;
+     color: light-dark(#808080, #808080);
      font-family: "Quicksand", sans-serif;
 }
  input:focus, select:focus, textarea:focus, button:focus {
@@ -64,7 +64,7 @@ if (localStorage.keywords == undefined) {
 }
 if (localStorage.engines == undefined) {
     const google = ["google", "https://www.google.com/search?q=%s"];
-    const ecosia = ["ecpsoa", "https://www.ecosia.org/search?method=index&q=%s"];
+    const ecosia = ["ecosia", "https://www.ecosia.org/search?method=index&q=%s"];
     const engines = [JSON.stringify(google), JSON.stringify(ecosia)];
     localStorage.setItem("engines", JSON.stringify(engines));
 }
@@ -75,6 +75,7 @@ document.addEventListener("visibilitychange", function() {
 });
 const engines = JSON.parse(localStorage.engines);
 const keywords = JSON.parse(localStorage.keywords);
+const colors = JSON.parse(localStorage.colors);
 written.style.color = colors[0];
 document.body.style.backgroundColor = colors[0];
 document.getElementById("textshower").style.color = colors[1];
@@ -366,6 +367,7 @@ async function testcommands() {
   </body>
 
 </html>
+
 
 
 
