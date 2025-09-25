@@ -70,12 +70,6 @@ if (localStorage.engines == undefined) {
 }
 const engines = JSON.parse(localStorage.engines);
 const keywords = JSON.parse(localStorage.keywords);
-const colors = JSON.parse(localStorage.colors);
-written.style.color = colors[0];
-document.body.style.backgroundColor = colors[0];
-document.getElementById("textshower").style.color = colors[1];
-document.getElementById("outputshower").style.color = colors[2];
-written.focus();
 
 async function search() {
     if (written.value.substring(0, 7) == "ignore ") { //ignore 
@@ -204,7 +198,7 @@ async function updatetext() {
         return;
     }
     if (written.value == "help" || written.value == "help ") {
-        textshow.innerText = "Specify a category that is keywords, engines, colors or other";
+        textshow.innerText = "Specify a category that is keywords, engines, or other";
     }
     if (written.value.substring(0, 5) == "help ") {
         if (written.value.substring(5, written.value.length) == "keywords") {
@@ -318,6 +312,7 @@ async function testcommands() {
   </body>
 
 </html>
+
 
 
 
