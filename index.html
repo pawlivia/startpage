@@ -70,7 +70,7 @@ if (localStorage.engines == undefined) {
     localStorage.setItem("engines", JSON.stringify(engines));
 }
 if (localStorage.colors == undefined) {
-    const colors = ["#0e0e0e", "white", "gray"];
+    const colors = ["#1c1b21", "#eaeaed", "gray"];
     localStorage.setItem("colors", JSON.stringify(colors));
 }
 document.addEventListener("visibilitychange", function() {
@@ -175,8 +175,8 @@ async function search() {
     if (written.value.substring(0, 3) == "bg ") { // bg color
         if (written.value == "bg default") {
             document.body.style.backgroundColor = written.value.substring(3, written.value.length);
-            written.style.color = "#0e0e0e";
-            colors[0] = "#0e0e0e"
+            written.style.color = "#1c1b21";
+            colors[0] = "#1c1b21"
             localStorage.setItem("colors", JSON.stringify(colors));
             written.value = "";
             return;
@@ -190,8 +190,8 @@ async function search() {
     }
     if (written.value.substring(0, 5) == "text ") { // text color
         if (written.value == "text default") {
-            document.getElementById("textshower").style.color = "white"
-            colors[1] = "white";
+            document.getElementById("textshower").style.color = "#eaeaed"
+            colors[1] = "#eaeaed";
             localStorage.setItem("colors", JSON.stringify(colors));
             written.value = "";
             return;
@@ -390,5 +390,6 @@ async function testcommands() {
   </body>
 
 </html>
+
 
 
