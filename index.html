@@ -75,6 +75,10 @@ document.addEventListener("visibilitychange", function() {
 });
 const engines = JSON.parse(localStorage.engines);
 const keywords = JSON.parse(localStorage.keywords);
+written.style.color = colors[0];
+document.body.style.backgroundColor = colors[0];
+document.getElementById("textshower").style.color = colors[1];
+document.getElementById("outputshower").style.color = colors[2];
 written.focus();
 
 async function search() {
@@ -159,6 +163,50 @@ async function search() {
     }
     if (written.value.substring(0, 4) == "web ") { // web
         window.location.href = "https://" + written.value.substring(4, written.value.length);
+        written.value = "";
+        return;
+    }
+    if (written.value.substring(0, 3) == "bg ") { // bg color
+        if (written.value == "bg default") {
+            document.body.style.backgroundColor = written.value.substring(3, written.value.length);
+            written.style.color = light-dark(#eaeaed, #1c1b21);
+            colors[0] = light-dark(#eaeaed, #1c1b21)
+            localStorage.setItem("colors", JSON.stringify(colors));
+            written.value = "";
+            return;
+        }
+        document.body.style.backgroundColor = written.value.substring(3, written.value.length);
+        written.style.color = written.value.substring(3, written.value.length);
+        colors[0] = written.value.substring(3, written.value.length);
+        localStorage.setItem("colors", JSON.stringify(colors));
+        written.value = "";
+        return;
+    }
+    if (written.value.substring(0, 5) == "text ") { // text color
+        if (written.value == "text default") {
+            document.getElementById("textshower").style.color = light-dark(#000000, #ffffff);
+            colors[1] = light-dark(#000000, #ffffff);
+            localStorage.setItem("colors", JSON.stringify(colors));
+            written.value = "";
+            return;
+        }
+        document.getElementById("textshower").style.color = written.value.substring(5, written.value.length);
+        colors[1] = written.value.substring(5, written.value.length);
+        localStorage.setItem("colors", JSON.stringify(colors));
+        written.value = "";
+        return;
+    }
+    if (written.value.substring(0, 7) == "output ") { // output color
+        if (written.value == "output default") {
+            document.getElementById("outputshower").style.color = "#808080";
+            colors[2] = "#808080";
+            localStorage.setItem("colors", JSON.stringify(colors));
+            written.value = "";
+            return;
+        }
+        document.getElementById("outputshower").style.color = written.value.substring(7, written.value.length);
+        colors[2] = written.value.substring(7, written.value.length);
+        localStorage.setItem("colors", JSON.stringify(colors));
         written.value = "";
         return;
     }
