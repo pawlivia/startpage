@@ -21,13 +21,13 @@
      display: flex;
      justify-content: center;
      align-items: center;
-     font-family: "Montserrat", sans-serif;
+     font-family: "Quicksand", sans-serif;
      overflow: hidden;
 }
  .contents {
      text-align: center;
      color: light-dark(#000000, #ffffff);
-     font-family: "Montserrat", sans-serif;
+     font-family: "Quicksand", sans-serif;
 }
  .nothing {
      border: none;
@@ -75,10 +75,6 @@ document.addEventListener("visibilitychange", function() {
 });
 const engines = JSON.parse(localStorage.engines);
 const keywords = JSON.parse(localStorage.keywords);
-written.style.color = colors[0];
-document.body.style.backgroundColor = colors[0];
-document.getElementById("textshower").style.color = colors[1];
-document.getElementById("outputshower").style.color = colors[2];
 written.focus();
 
 async function search() {
