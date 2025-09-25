@@ -68,6 +68,11 @@ if (localStorage.engines == undefined) {
     const engines = [JSON.stringify(google), JSON.stringify(ecosia)];
     localStorage.setItem("engines", JSON.stringify(engines));
 }
+document.addEventListener("visibilitychange", function() {
+    written.value = "";
+    document.getElementById("textshower").innerText = "";
+    textshow.innerHTML = "";
+});
 const engines = JSON.parse(localStorage.engines);
 const keywords = JSON.parse(localStorage.keywords);
 
@@ -312,6 +317,7 @@ async function testcommands() {
   </body>
 
 </html>
+
 
 
 
