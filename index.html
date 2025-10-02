@@ -17,7 +17,6 @@
      color-scheme: light dark;
  }
  body {
-     background-color: light-dark(#eaeaed, #1c1b21);
      display: flex;
      justify-content: center;
      align-items: center;
@@ -26,13 +25,11 @@
 }
  .contents {
      text-align: center;
-     color: light-dark(#000000, #ffffff);
      font-family: "Quicksand", sans-serif;
 }
  .nothing {
      border: none;
      background-color: transparent;
-     color: light-dark(#808080, #808080);
      font-family: "Quicksand", sans-serif;
 }
  input:focus, select:focus, textarea:focus, button:focus {
@@ -56,36 +53,63 @@ let engine = 1;
 if (localStorage.default) {
     engine = parseInt(localStorage.default);
 }
+
 const written = document.getElementById("writtenstuff");
 const textshow = document.getElementById("outputshower");
+
 if (localStorage.keywords == undefined) {
     const keywords = [];
     localStorage.setItem("keywords", JSON.stringify(keywords));
 }
 if (localStorage.engines == undefined) {
     const google = ["google", "https://www.google.com/search?q=%s"];
-    const ddg = ["duckduckgo", "https://duckduckgo.com/?q=%s"];
-    const bing = ["bing", "https://www.bing.com/search?q=%s"];
-    const engines = [JSON.stringify(google), JSON.stringify(ddg), JSON.stringify(bing)];
+    const ecosia = ["ecosia", "https://www.ecosia.org/search?method=index&q=%s"];
+    const engines = [JSON.stringify(google), JSON.stringify(ecosia)];
     localStorage.setItem("engines", JSON.stringify(engines));
 }
-if (localStorage.colors == undefined) {
-    const colors = ["#0e0e0e", "white", "gray"];
-    localStorage.setItem("colors", JSON.stringify(colors));
-}
+
+const engines = JSON.parse(localStorage.engines);
+const keywords = JSON.parse(localStorage.keywords);
+
 document.addEventListener("visibilitychange", function() {
     written.value = "";
     document.getElementById("textshower").innerText = "";
     textshow.innerHTML = "";
 });
-const engines = JSON.parse(localStorage.engines);
-const keywords = JSON.parse(localStorage.keywords);
+
+if (localStorage.colors === undefined || !localStorage.getItem("colors-set")) {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const darkColors = ["#1c1b21", "#ffffff", "#8e8e8e"];
+    const lightColors = ["#eaeaed", "#000000", "#8e8e8e"];
+
+    const colors = prefersDark ? darkColors : lightColors;
+
+    localStorage.setItem("colors", JSON.stringify(colors));
+}
+
 const colors = JSON.parse(localStorage.colors);
-written.style.color = colors[0];
-document.body.style.backgroundColor = colors[0];
-document.getElementById("textshower").style.color = colors[1];
-document.getElementById("outputshower").style.color = colors[2];
+
+function applyColors(colors) {
+    written.style.color = colors[0];
+    document.body.style.backgroundColor = colors[0];
+    document.getElementById("textshower").style.color = colors[1];
+    document.getElementById("outputshower").style.color = colors[2];
+}
+
+applyColors(colors);
 written.focus();
+
+if (!localStorage.getItem("colors-set")) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        const newColors = e.matches
+            ? ["#1c1b21", "#ffffff", "#8e8e8e"]
+            : ["#eaeaed", "#000000", "#8e8e8e"];
+
+        localStorage.setItem("colors", JSON.stringify(newColors));
+        applyColors(newColors);
+    });
+}
 
 async function search() {
     if (written.value.substring(0, 7) == "ignore ") { //ignore 
@@ -172,50 +196,7 @@ async function search() {
         written.value = "";
         return;
     }
-    if (written.value.substring(0, 3) == "bg ") { // bg color
-        if (written.value == "bg default") {
-            document.body.style.backgroundColor = written.value.substring(3, written.value.length);
-            written.style.color = "#0e0e0e";
-            colors[0] = "#0e0e0e"
-            localStorage.setItem("colors", JSON.stringify(colors));
-            written.value = "";
-            return;
-        }
-        document.body.style.backgroundColor = written.value.substring(3, written.value.length);
-        written.style.color = written.value.substring(3, written.value.length);
-        colors[0] = written.value.substring(3, written.value.length);
-        localStorage.setItem("colors", JSON.stringify(colors));
-        written.value = "";
-        return;
-    }
-    if (written.value.substring(0, 5) == "text ") { // text color
-        if (written.value == "text default") {
-            document.getElementById("textshower").style.color = "white"
-            colors[1] = "white";
-            localStorage.setItem("colors", JSON.stringify(colors));
-            written.value = "";
-            return;
-        }
-        document.getElementById("textshower").style.color = written.value.substring(5, written.value.length);
-        colors[1] = written.value.substring(5, written.value.length);
-        localStorage.setItem("colors", JSON.stringify(colors));
-        written.value = "";
-        return;
-    }
-    if (written.value.substring(0, 7) == "output ") { // output color
-        if (written.value == "output default") {
-            document.getElementById("outputshower").style.color = "gray";
-            colors[2] = "gray";
-            localStorage.setItem("colors", JSON.stringify(colors));
-            written.value = "";
-            return;
-        }
-        document.getElementById("outputshower").style.color = written.value.substring(7, written.value.length);
-        colors[2] = written.value.substring(7, written.value.length);
-        localStorage.setItem("colors", JSON.stringify(colors));
-        written.value = "";
-        return;
-    }
+
     const enginedata = JSON.parse(engines[engine]);
     window.location.href = enginedata[1].replace("%s", written.value);
 }
@@ -257,19 +238,8 @@ async function updatetext() {
         }
         return;
     }
-    if (written.value == "colors") {
-        for (let i = 0; i < colors.length; i++) {
-            colordata = colors[i];
-            if (i == colors.length - 1) {
-                textshow.innerText += " " + colordata;
-            } else {
-                textshow.innerText += " " + colordata + ",";
-            }
-        }
-        return;
-    }
     if (written.value == "help" || written.value == "help ") {
-        textshow.innerText = "Specify a category that is keywords, engines, colors or other";
+        textshow.innerText = "Specify a category that is keywords, engines or other";
     }
     if (written.value.substring(0, 5) == "help ") {
         if (written.value.substring(5, written.value.length) == "keywords") {
@@ -278,10 +248,6 @@ async function updatetext() {
         }
         if (written.value.substring(5, written.value.length) == "engines") {
             textshow.innerHTML = "add engine [search engine] [link with %s in place of the query] - add a search engine<br>remove engine [search engine] - remove a search engine<br>default [engine] - set your default search engine<br>[engine] [query] - search with a search engine<br>[engine] - switch your current search engine<br>engines - see all available search engines";
-            return;
-        }
-        if (written.value.substring(5, written.value.length) == "colors") {
-            textshow.innerHTML = "text/bg/output [css color name or hex code] - change the text, background or command output color<br>text/bg/output default - set the text, background or command output color to the default<br>colors - see all set colors";
             return;
         }
         if (written.value.substring(5, written.value.length) == "other") {
@@ -341,9 +307,6 @@ async function testcommands() {
     written.value = "keywords";
     updatetext();
     await sleep(500);
-    written.value = "colors";
-    updatetext();
-    await sleep(500);
     written.value = "add keyword test";
     updatetext();
     search();
@@ -389,3 +352,4 @@ async function testcommands() {
     </script>
   </body>
 </html>
+
