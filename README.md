@@ -1,20 +1,19 @@
 <hr>
 <div><img src="favicon/favicon.gif" width=100></div>
 <hr>
-Features:<br>
+features:<br>
 <hr>
-- Customize the colors<br>
-- Keywords to quickly get to a website<br>
-- Go to links without having to use the address bar<br>
-- Easily add any search engine you want<br>
-- Quickly search with different search engines<br>
-- Use as a search engine on your browser by entering 
+- keywords to quickly get to a website<br>
+- go to links without having to use the address bar<br>
+- easily add any search engine you want<br>
+- quickly search with different search engines<br>
+- use as a search engine on your browser by entering 
 
-``` https://trofiswag.github.io/startpage?q=%s ```
+``` https://pawlivia.github.io/startpage?q=%s ```
 <hr>
-Commands:<br>
+commands:<br>
 <hr>
-Keywords and search engines have to be only one word<br>
+keywords and search engines have to be only one word<br>
 
 ``` help [category] ``` - See all commands nicely categorized (categories are keywords, engines and other)<br>
 ``` add keyword [keyword] [link with a protocol] ``` - Add a keyword that takes you to a link <br>
@@ -28,7 +27,4 @@ Keywords and search engines have to be only one word<br>
 ``` [engine] ``` - Switch the current search engine being used<br>
 ``` [engine] [query] ``` - Search with the provided search engine<br>
 ``` ignore [query] ``` - Ignore any commands and just search the query<br>
-``` text/bg/output [css color name or hex code] ``` - Change the text, background or command output color<br>
-``` text/bg/output default ``` - Set the text, background or command output color to the default<br>
-``` colors ``` - See all colors currently set
 
