@@ -72,6 +72,14 @@ if (localStorage.engines == undefined) {
 const engines = JSON.parse(localStorage.engines);
 const keywords = JSON.parse(localStorage.keywords);
 
+document.body.addEventListener("touchend", () => {
+  written.focus();
+});
+
+document.body.addEventListener("click", () => {
+  written.focus();
+});
+
 document.addEventListener("visibilitychange", function() {
     written.value = "";
     document.getElementById("textshower").innerText = "";
@@ -367,6 +375,7 @@ async function testcommands() {
     </script>
   </body>
 </html>
+
 
 
 
