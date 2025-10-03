@@ -1,5 +1,9 @@
 <hr>
-<div><img src="favicon/favicon.gif" width=100></div>
+<picture>
+<source srcset="favicon/d.gif" media="(prefers-color-scheme: dark)">
+<source srcset="favicon/l.gif" media="(prefers-color-scheme: light)">
+<img src="favicon/l.gif" width="100" alt="themed image">
+</picture>
 <hr>
 features:<br>
 <hr>
