@@ -6,37 +6,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="icon" id="favicon" href="l1.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" id="favicon" href="d1.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" id="favicon" type="image/gif" href="l.gif" media="(prefers-color-scheme: light)">
+    <link rel="icon" id="favicon" type="image/gif" href="d.gif" media="(prefers-color-scheme: dark)">
     <title>New Tab</title>
     <style>
- html, body {
-     height: 100%;
-     margin: 0;
-     padding: 0;
-     overflow: hidden;
-     color-scheme: light dark;
- }
- body {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     font-family: "Quicksand", sans-serif;
-     overflow: hidden;
-}
- .contents {
-     text-align: center;
-     font-family: "Quicksand", sans-serif;
-}
- .nothing {
-     border: none;
-     background-color: transparent;
-     font-family: "Quicksand", sans-serif;
-}
- input:focus, select:focus, textarea:focus, button:focus {
-     outline: none;
-}
-
+       body {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           font-family: "Quicksand", sans-serif;
+           overflow: hidden;
+      }
+       .contents {
+           text-align: center;
+           font-family: "Quicksand", sans-serif;
+      }
+       .nothing {
+           border: none;
+           background-color: transparent;
+           font-family: "Quicksand", sans-serif;
+      }
+       input:focus, select:focus, textarea:focus, button:focus {
+           outline: none;
+      }
     </style>
   </head>
   <body> 
@@ -280,26 +272,6 @@ async function insertcursor() {
     document.getElementById("textshower").innerText = written.value;
     setTimeout(insertcursor, 500);
 }
-
-const favicon = document.getElementById("favicon");
-
-function nextframe() {
-  if (window.matchMedia) {
-    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-      if (favicon.href.endsWith("favicon/d1.png")) {
-           favicon.href = "favicon/d2.png";
-      } else {
-         favicon.href = "favicon/d1.png";
-      }
-    } else {
-      if (favicon.href.endsWith("favicon/l1.png")) {
-           favicon.href = "favicon/l2.png";
-      } else {
-          favicon.href = "favicon/l1.png";
-      }
-    }
-  }
-}
       
 insertcursor();
       
@@ -375,6 +347,7 @@ async function testcommands() {
     </script>
   </body>
 </html>
+
 
 
 
