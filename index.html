@@ -10,25 +10,33 @@
     <link rel="icon" id="favicon" type="image/gif" href="d.gif" media="(prefers-color-scheme: dark)">
     <title>New Tab</title>
     <style>
-       body {
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           font-family: "Quicksand", sans-serif;
-           overflow: hidden;
-      }
-       .contents {
-           text-align: center;
-           font-family: "Quicksand", sans-serif;
-      }
-       .nothing {
-           border: none;
-           background-color: transparent;
-           font-family: "Quicksand", sans-serif;
-      }
-       input:focus, select:focus, textarea:focus, button:focus {
-           outline: none;
-      }
+ html, body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     color-scheme: light dark;
+ }
+ body {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-family: "Quicksand", sans-serif;
+     overflow: hidden;
+}
+ .contents {
+     text-align: center;
+     font-family: "Quicksand", sans-serif;
+}
+ .nothing {
+     border: none;
+     background-color: transparent;
+     font-family: "Quicksand", sans-serif;
+}
+ input:focus, select:focus, textarea:focus, button:focus {
+     outline: none;
+}
+
     </style>
   </head>
   <body> 
@@ -272,7 +280,9 @@ async function insertcursor() {
     document.getElementById("textshower").innerText = written.value;
     setTimeout(insertcursor, 500);
 }
-      
+
+const favicon = document.getElementById("favicon");
+    
 insertcursor();
       
 const queryString = window.location.search;
@@ -347,8 +357,6 @@ async function testcommands() {
     </script>
   </body>
 </html>
-
-
 
 
 
