@@ -240,7 +240,7 @@ async function updatetext() {
         return;
     }
     if (written.value == "help" || written.value == "help ") {
-        textshow.innerText = "Specify a category that is keywords, engines or other";
+        textshow.innerText = "specify a category that is keywords, engines or other";
     }
     if (written.value.substring(0, 5) == "help ") {
         if (written.value.substring(5, written.value.length) == "keywords") {
@@ -256,7 +256,7 @@ async function updatetext() {
             return;
         } else {
             if (written.value != "help ") {
-            textshow.innerText = "Category doesn't exist"
+            textshow.innerText = "category doesn't exist"
             }
         }
         return;
@@ -367,5 +367,6 @@ async function testcommands() {
     </script>
   </body>
 </html>
+
 
 
