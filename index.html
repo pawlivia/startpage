@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
@@ -10,15 +12,9 @@
     <link rel="icon" id="favicon" href="d1.png" media="(prefers-color-scheme: dark)">
     <title>New Tab</title>
     <style>
- html, body {
-     height: 100%;
-     margin: 0;
-     padding: 0;
-     overflow: hidden;
-     color-scheme: light dark;
- }
  body {
      display: flex;
+     height: 100dvh;
      justify-content: center;
      align-items: center;
      font-family: "Quicksand", sans-serif;
@@ -28,11 +24,17 @@
      text-align: center;
      font-family: "Quicksand", sans-serif;
 }
- .nothing {
-     border: none;
-     background-color: transparent;
-     font-family: "Quicksand", sans-serif;
+.nothing {
+    border: none;
+    background-color: transparent;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.2em;
+    width: 90vw;
+    text-align: center;
+    color: inherit;
+    caret-color: transparent;
 }
+
  input:focus, select:focus, textarea:focus, button:focus {
      outline: none;
 }
@@ -43,7 +45,7 @@
    <div class="contents">
 <div style="font-size: 150%; left: 25px;" id="textshower"></div><br>
 <div style="font-size: 150%; color: gray; left: 25px;" id="outputshower"></div>
-<input type="text" spellcheck="false" onkeypress="updatetext()" onkeyup="updatetext()" onkeydown="updatetext()" class="nothing" id="writtenstuff"></input>
+<input type="text" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" onkeypress="updatetext()" onkeyup="updatetext()" onkeydown="updatetext()" class="nothing" id="writtenstuff"></input>
     </div>
     <script>
 function sleep(ms) {
@@ -79,6 +81,10 @@ document.body.addEventListener("touchend", () => {
 document.body.addEventListener("click", () => {
   written.focus();
 });
+
+window.onload = () => {
+  setTimeout(() => written.focus(), 100); // delay helps on mobile
+};
 
 document.addEventListener("visibilitychange", function() {
     written.value = "";
@@ -375,6 +381,7 @@ async function testcommands() {
     </script>
   </body>
 </html>
+
 
 
 
